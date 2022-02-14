@@ -1,12 +1,10 @@
 pipeline {
-    agent any 
-    stages {
-        stage('Build') {
-            steps {
-                checkout scm
-                sh 'python -m py_compile web/app.py'
-                stash(name: 'compiled-results', includes: 'web/*.py*')
-            }
-        }
+  agent { docker { image 'python:3.7.2' } }
+  stages {
+    stage('build') {
+      steps {
+        sh 'pip install -r web/requirements.txt'
+      }
     }
+  }
 }
