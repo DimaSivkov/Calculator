@@ -1,5 +1,5 @@
 pipeline {
-    node {
+    agent any
     environment {
         registryName = "dsivkovregistry/calculator:${env.BUILD_ID}"
         registryCredential = 'ACR'
@@ -34,4 +34,4 @@ pipeline {
             }
         }
     }
-    }}
+ }
