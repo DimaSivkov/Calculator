@@ -40,15 +40,13 @@ pipeline {
                             }
                         }
                         if(env.BRANCH_NAME == 'main') { 
-                            stage('Upload Image to ACR') {
-                                steps{   
+                            stage('Upload Image to ACR') {  
                                     script {
                                         docker.withRegistry( "http://${registryUrl}", registryCredential ) {
                                         dockerImage.push()
                                     }
                                 }
                             }
-                        }
                         }
                     }
                 }
