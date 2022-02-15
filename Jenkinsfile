@@ -33,7 +33,8 @@ pipeline {
                                         echo result
                                     }
                                 }
-                                if (result.result != 5) error("Tests are failed")
+                                def data = new JsonSlurperClassic().parseText(result)
+                                if (data.result != 5) error("Tests are failed")
                             }
                         }
                     }
