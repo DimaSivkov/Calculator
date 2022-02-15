@@ -28,7 +28,7 @@ pipeline {
                                 for(int i=0;i<5;i++) { 
                                     def result = sh(script: "CURL -X GET http://0.0.0.0:5000/operate?operation=%2b&a=2&b=3", returnStdout: true)
                                     echo result
-                                    sleep(1000)
+                                    sleep(1)
                                 }
                             }
                         }
