@@ -27,10 +27,16 @@ pipeline {
                         dockerImage = docker.build(registryName) 
                         stage ('Test') {
                             dockerImage.withRun('-p 5000:5000') {
-                                def result = sh(script: "curl -X GET 'http://0.0.0.0:5000/operate?operation=%2b&a=2&b=3'", returnStdout: true)
-                                echo result
-                                def data = new JsonSlurperClassic().parseText(result)
-                                if (data.result != 5) error("Tests are failed")
+                                def expectedResult = 5
+                                def actualResult = 0
+                                timeout(time: 5, unit: 'SECONDS') {
+                                    while(actualResult != expectedResult) {
+                                        def result = sh(script: "curl -X GET 'http://0.0.0.0:5000/operate?operation=%2b&a=2&b=3'", returnStdout: true)
+                                        echo result
+                                        def data = new JsonSlurperClassic().parseText(result)
+                                        actualResult = data.result
+                                    }
+                                }
                             }
                         }
                     }
