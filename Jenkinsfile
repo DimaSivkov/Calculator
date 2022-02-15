@@ -3,6 +3,7 @@ pipeline {
   stages {
     stage('build') {
       steps {
+        checkout scm
         sh 'pip install -r web/requirements.txt'
       }
     }
