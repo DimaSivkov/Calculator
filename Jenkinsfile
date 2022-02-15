@@ -21,7 +21,7 @@ pipeline {
         stage ('Build Docker image') {
             steps { 
                 script {
-                    dockerImage = docker.build(registryName, "-f ./webDockerfile .") 
+                    dockerImage = docker.build(registryName, "-f ./web/Dockerfile .") 
                     stage ('Test') {
                         dockerImage.withRun('-p 5000:5000') {
                             def result = sh(script: "CURL -X GET http://0.0.0.0:5000/operate?operation=%2b&a=2&b=3", returnStdout: true)
