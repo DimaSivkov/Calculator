@@ -1,7 +1,7 @@
 pipeline {
     agent none 
     environment {
-        registryName = "dSivkovRegistry/calculator"
+        registryName = "dsivkovregistry/calculator:${env.BUILD_ID}"
         registryCredential = 'ACR'
         dockerImage = ''
         registryUrl = 'dsivkovregistry.azurecr.io'
@@ -21,7 +21,13 @@ pipeline {
         stage ('Build Docker image') {
             steps { 
                 script {
-                    dockerImage = docker.build registryName
+                    dockerImage = docker.build("registryName", "./web/dockerfile") 
+                    stage ('Test') {
+                        dockerImage.withRun('-p 5000:5000') {
+                            def result = sh(script: "CURL -X GET http://0.0.0.0:5000/operate?operation=%2b&a=2&b=3", returnStdout: true)
+                            echo result
+                        }
+                    }
                 }
             }
         }
