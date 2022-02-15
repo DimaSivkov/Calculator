@@ -21,7 +21,7 @@ pipeline {
         stage ('Build Docker image') {
             steps { 
                 script {
-                    dir(./web) {
+                    dir("./web") {
                         dockerImage = docker.build(registryName) 
                         stage ('Test') {
                             dockerImage.withRun('-p 5000:5000') {
