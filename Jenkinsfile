@@ -33,7 +33,7 @@ pipeline {
                                         echo result
                                     }
                                 }
-                                if (result.result != 5) error("Tests are failed)
+                                if (result.result != 5) error("Tests are failed")
                             }
                         }
                     }
