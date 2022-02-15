@@ -27,9 +27,13 @@ pipeline {
                             dockerImage.withRun('-p 5000:5000') {
                                 def result
                                 timeout(time: 3, unit: "SECONDS") { 
-                                    result = sh(script: "CURL -X GET 'http://0.0.0.0:5000/operate?operation=%2b&a=2&b=3'", returnStdout: true)
-                                    echo result
+                                    while()
+                                    {   
+                                        result = sh(script: "curl -X GET 'http://0.0.0.0:5000/operate?operation=%2b&a=2&b=3'", returnStdout: true)
+                                        echo result
+                                    }
                                 }
+                                if (result.result != 5) error("Tests are failed)
                             }
                         }
                     }
