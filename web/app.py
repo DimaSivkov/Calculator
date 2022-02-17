@@ -12,7 +12,7 @@ def operate():
     if "operation" and "a" and "b" in request.args:
         try:
             operation = request.args["operation"]
-            if operation not in "+-/***":
+            if operation not in "+-/*":
                 raise ValueError()
             a = int(request.args["a"])
             b = int(request.args["b"])
@@ -35,10 +35,7 @@ def operate():
         if "/" in operation:
             operatee = operation.split("/")
             result = a / b
-        if "**" in operation:
-            operatee = operation.split("**")
-            result = a ** b
-        response = {"updated_date": datetime.now(), "operation": operation, "result": result}
+        response = {"updated_date": datetime.now(), "operation": operation, "result": result, "a=": a, "b=": b}
         results.append(response)
         return response, 200
     except Exception as e:
