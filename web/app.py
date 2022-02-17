@@ -24,16 +24,12 @@ def operate():
     # Check for the operation type and get the result
     try:
         if "+" in operation:
-            operatee = operation.split("+")
             result = a + b
         if "-" in operation:
-            operatee = operation.split("-")
             result = a - b
         if "*" in operation:
-            operatee = operation.split("*")
             result = a * b
         if "/" in operation:
-            operatee = operation.split("/")
             result = a / b
         response = {"updated_date": datetime.now(), "operation": operation, "result": result, "a=": a, "b=": b}
         results.append(response)
