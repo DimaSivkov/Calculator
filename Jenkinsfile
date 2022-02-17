@@ -4,6 +4,7 @@ pipeline {
     agent any
     environment {
         registryName = "dsivkovregistry/calculator:${env.BUILD_ID}"
+        registryNameProductionTag = "dsivkovregistry/calculator:production"
         registryCredential = 'ACR'
         dockerImage = ''
         registryUrl = 'dsivkovregistry.azurecr.io'
@@ -43,9 +44,12 @@ pipeline {
                             stage('Upload Image to ACR') {  
                                     script {
                                         docker.withRegistry( "http://${registryUrl}", registryCredential ) {
-                                        dockerImage.push()
+                                            dockerImage.push()
+                                        }
+                                        docker.withRegistry( "http://${registryNameProductionTag}", registryCredential ) {
+                                            dockerImage.push()
+                                        }
                                     }
-                                }
                             }
                         }
                     }
