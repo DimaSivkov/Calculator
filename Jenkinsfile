@@ -4,7 +4,7 @@ pipeline {
     agent any
     environment {
         registryName = "dsivkovregistry/calculator:${env.BUILD_ID}"
-        registryNameProductionTag = "dsivkovregistry/calculator:production"
+        registryNameProductionTag = "dsivkovregistry/calculator:latest"
         registryCredential = 'ACR'
         dockerImage = ''
         registryUrl = 'dsivkovregistry.azurecr.io'
