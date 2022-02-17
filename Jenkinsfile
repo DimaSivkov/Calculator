@@ -4,7 +4,6 @@ pipeline {
     agent any
     environment {
         registryName = "dsivkovregistry/calculator:${env.BUILD_ID}"
-        registryNameProductionTag = "dsivkovregistry/calculator:latest"
         registryCredential = 'ACR'
         dockerImage = ''
         registryUrl = 'dsivkovregistry.azurecr.io'
@@ -45,9 +44,7 @@ pipeline {
                                     script {
                                         docker.withRegistry( "http://${registryUrl}", registryCredential ) {
                                             dockerImage.push()
-                                        }
-                                        docker.withRegistry( "http://${registryNameProductionTag}", registryCredential ) {
-                                            dockerImage.push()
+                                            dockerImage.push('latest')
                                         }
                                     }
                             }
