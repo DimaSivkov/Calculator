@@ -12,7 +12,7 @@ def operate():
     if "operation" and "a" and "b" in request.args:
         try:
             operation = request.args["operation"]
-            if operation not in "+-/**":
+            if operation not in "+","-","/.","*","**":
                 raise ValueError()
             a = int(request.args["a"])
             b = int(request.args["b"])
