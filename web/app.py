@@ -35,16 +35,19 @@ def operate():
         if "/" in operation:
             operatee = operation.split("/")
             result = a / b
+        if "**" in operation:
+            operatee = operation.split("**")
+            result = a ** b
         response = {"updated_date": datetime.now(), "operation": operation, "result": result}
         results.append(response)
         return response, 200
     except Exception as e:
-        return dict(error="Calculation Error", exception=str(e), message="Review operation parameters and try again"), 400
+        return dict(error="Calculation Error, don't break me", exception=str(e), message="Review operation parameters and try again"), 400
 
 
 @app.errorhandler(404)
 def page_not_found(error):
-    return dict(response="This page does not exist"), 404
+    return dict(response="Sorry, This page does not exist :("), 404
 
 
 if __name__ == "__main__":
