@@ -33,7 +33,7 @@ def operate():
             result = a / b
         if "**" in operation:
             result = a ** b
-        response = {"updated_date": datetime.now(), "result": result, "a=": a, "operation": operation, "b=": b}
+        response = {"updated_date": datetime.now(), "result": result, "operation": operation}
         results.append(response)
         return response, 200
     except Exception as e:
