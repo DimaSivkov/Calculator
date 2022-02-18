@@ -33,7 +33,7 @@ def operate():
             result = a / b
         if "**" in operation:
             result = a ** b
-        response = {"updated_date": datetime.now(), "result": result, "operation": operation}
+        response = {"updated_date": datetime.now(), "result": result, "a": a, "operation": operation, "b": b}
         results.append(response)
         return response, 200
     except Exception as e:
@@ -42,7 +42,7 @@ def operate():
 
 @app.errorhandler(404)
 def page_not_found(error):
-    return dict(response="Sorry, This page does not exist :("), 404
+    return dict(response="Welcome to the calculator, to use it add operator and a and b, you can use (+,-,/,*,**) (%2B,-,%2F,%2A,%2A%2A), exemple: operate?operation=%2b&a=2&b=2"), 404
 
 
 if __name__ == "__main__":
